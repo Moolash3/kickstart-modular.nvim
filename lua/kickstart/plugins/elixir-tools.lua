@@ -11,7 +11,7 @@ return {
       elixirls = {
         enable = true,
         settings = elixirls.settings {
-          dialyzerEnabled = true,
+          dialyzerEnabled = false,
           enableTestLenses = false,
         },
       },
