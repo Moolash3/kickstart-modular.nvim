@@ -7,12 +7,11 @@ return {
     local elixirls = require 'elixir.elixirls'
 
     elixir.setup {
-      nextls = { enable = true, spitfire = true },
+      nextls = { enable = false, spitfire = false },
       elixirls = {
-        enable = false,
+        enable = true,
         settings = elixirls.settings {
-          dialyzerEnabled = false,
-          dialyzerFormat = 'dialyzer_long',
+          dialyzerEnabled = true,
           enableTestLenses = false,
           mixEnv = 'dev',
         },
