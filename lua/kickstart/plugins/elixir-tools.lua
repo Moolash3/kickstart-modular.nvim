@@ -12,6 +12,7 @@ return {
         enable = true,
         settings = elixirls.settings {
           dialyzerEnabled = true,
+          dialyzerWarnOpts = { 'no_opaque' },
           enableTestLenses = false,
           mixEnv = 'dev',
         },
