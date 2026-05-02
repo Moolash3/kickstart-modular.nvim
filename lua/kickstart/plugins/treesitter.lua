@@ -6,6 +6,7 @@ return {
     lazy = false,
     build = ':TSUpdate',
     branch = 'main',
+    main = 'nvim-treesitter.config',
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter-intro`
     config = function()
       -- ensure basic parser are installed
