@@ -220,6 +220,7 @@ return {
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         -- ts_ls = {},
         --
+        eslint = {},
 
         lua_ls = {
           -- cmd = { ... },
@@ -237,6 +238,15 @@ return {
         },
       }
 
+      --      local masonBin = os.getenv 'HOME' .. '/.local/share/nvim/mason/bin'
+      --     vim.lsp.config('expert', {
+      --      cmd = { masonBin .. '/expert', '--stdio' },
+      --     root_markers = { 'mix.exs', '.git' },
+      --    filetypes = { 'elixir', 'eelixir', 'heex' },
+      -- })
+
+      --vim.lsp.enable 'expert'
+
       -- Ensure the servers and tools above are installed
       --
       -- To check the current status of installed tools and/or manually install
@@ -253,8 +263,24 @@ return {
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
+        'prettier',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
+
+      require('typescript-tools').setup {
+        on_attach = function(client)
+          client.server_capabilities.documentFormattingProvider = false
+          client.server_capabilities.documentRangeFormattingProvider = false
+        end,
+        settings = {
+          tsserver_plugins = {
+            -- for TypeScript v4.9+
+            '@styled/typescript-styled-plugin',
+            -- or for older TypeScript versions
+            -- "typescript-styled-plugin",
+          },
+        },
+      }
 
       require('mason-lspconfig').setup {
         ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
